@@ -1,0 +1,38 @@
+@startuml
+top to bottom direction
+skinparam linetype ortho
+
+class Twitter {
+    +addUser(String): boolean
+    +deleteUser(User): void
+    -existsUser(String): boolean
+}
+
+interface Publication {
+    +getText(): String
+}
+
+class Tweet implements Publication {
+    + << create >> Tweet(String)
+    -text: String
+}
+
+class Retweet implements Publication {
+    + << create >> Retweet(Tweet)
+    +getOriginalTweet(): Tweet
+}
+
+class User {
+    + << create >> User(String)
+    -screenName: String
+    +postTweet(String): boolean
+    +postRetweet(Tweet): boolean
+    +deleteTweets(): void
+    +getScreenName(): String
+    -checkLength(String): boolean
+}
+
+Twitter "1" *--> "*" User: users
+User "1" *--> "*" Publication: publications
+Retweet --> Tweet: originalTweet
+@enduml
