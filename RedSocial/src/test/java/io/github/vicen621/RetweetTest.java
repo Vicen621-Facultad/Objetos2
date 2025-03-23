@@ -13,13 +13,18 @@ public class RetweetTest {
 
     @BeforeEach
     public void setup() {
-        originalTweet = new Tweet("test");
+        originalTweet = new Tweet("test", "testUser");
         retweet = new Retweet(originalTweet);
     }
 
     @Test
     public void test_getText() {
         assertEquals(retweet.getText(), originalTweet.getText());
+    }
+
+    @Test
+    public void test_getCreator() {
+        assertEquals(retweet.getCreator(), originalTweet.getCreator());
     }
 
     @Test

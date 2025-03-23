@@ -11,11 +11,16 @@ public class TweetTest {
 
     @BeforeEach
     public void setup() {
-        tweet = new Tweet("test");
+        tweet = new Tweet("test", "testUser");
     }
 
     @Test
     public void test_getText() {
-        assertEquals(tweet.getText(), "test");
+        assertEquals("test", tweet.getText());
+    }
+
+    @Test
+    public void test_getCreator() {
+        assertEquals("testUser", tweet.getCreator());
     }
 }

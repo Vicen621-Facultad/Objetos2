@@ -6,6 +6,7 @@ import io.github.vicen621.publication.Tweet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class User {
     private String screenName;
@@ -25,9 +26,8 @@ public class User {
         if (!checkLength(text))
             return false;
 
-        Tweet tweet = new Tweet(text);
-        publications.add(tweet);
-        return true;
+        Tweet tweet = new Tweet(text, this.getScreenName());
+        return publications.add(tweet);
     }
 
     /**
@@ -42,12 +42,20 @@ public class User {
     /**
      * Borra todos los tweets del usuario
      */
-    public void deleteTweets() {
-        this.publications.clear();
+    public void deleteRetweetsFromUser(User user) {
+        List<Publication> delete = this.publications.stream()
+                .filter(publication -> publication.getCreator().equals(user.getScreenName()))
+                .collect(Collectors.toList());
+
+        this.publications.removeAll(delete);
     }
 
     public String getScreenName() {
         return screenName;
+    }
+
+    public List<Publication> getPublications() {
+        return this.publications;
     }
 
     /**

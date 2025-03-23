@@ -12,6 +12,11 @@ public class Retweet implements Publication {
         return this.originalTweet.getText();
     }
 
+    @Override
+    public String getCreator() {
+        return this.originalTweet.getCreator();
+    }
+
     public Tweet getOriginalTweet() {
         return originalTweet;
     }

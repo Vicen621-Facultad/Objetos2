@@ -29,6 +29,7 @@ public class Twitter {
      * @param user El usuario a borrar
      */
     public void deleteUser(User user) {
+        users.forEach(otherUser -> otherUser.deleteRetweetsFromUser(user));
         users.remove(user);
     }
 
