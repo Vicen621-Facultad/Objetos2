@@ -1,0 +1,48 @@
+@startuml
+class Socio {
+    -nombre: String
+    -legajo: String
+    -email: String
+
+    + <<constructor>> Socio(String, String, String)
+    +getNombre(): String
+    +setNombre(String)
+    +getLegajo(): String
+    +setLegajo(String)
+    +getEmail(): String
+    +setEmail(String)
+}
+
+class Biblioteca {
+    +agregarSocio(Socio)
+    +exportarSocios()
+    +getExporter(): VoorheesExporter
+    +setExporter(VoorheesExporter): VoorheesExporter
+}
+
+class VoorheesExporter {
+    -exportar(Socio): String
+    +exportar(Socio[]): String
+}
+
+class JsonSimpleVoorheesAdapter extends VoorheesExporter {
+    +exportar(Socio[]): String
+}
+
+class JsonSimpleExporter {
+    -exportar(Socio): JSONObject
+    +exportar(Socio[]): String
+}
+
+JsonSimpleVoorheesAdapter --> JsonSimpleExporter: "adaptee"
+Biblioteca -> Socio: "1..*"
+Biblioteca --> VoorheesExporter
+
+note right of JsonSimpleVoorheesAdapter
+    Adapter
+end note
+
+note right of VoorheesExporter
+    Target
+end note
+@enduml

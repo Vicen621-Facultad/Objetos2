@@ -1,0 +1,30 @@
+@startuml
+class Socio {
+    -nombre: String
+    -legajo: String
+    -email: String
+
+    + <<constructor>> Socio(String, String, String)
+    +getNombre(): String
+    +setNombre(String)
+    +getLegajo(): String
+    +setLegajo(String)
+    +getEmail(): String
+    +setEmail(String)
+}
+
+class Biblioteca {
+    +agregarSocio(Socio)
+    +exportarSocios()
+    +getExporter(): VoorheesExporter
+    +setExporter(VoorheesExporter): VoorheesExporter
+}
+
+class VoorheesExporter {
+    -exportar(Socio): String
+    +exportar(Socio[]): String
+}
+
+Biblioteca o-- Socio: "1..*"
+Biblioteca o-- VoorheesExporter
+@enduml
