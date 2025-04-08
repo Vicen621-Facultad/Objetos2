@@ -1,0 +1,35 @@
+@startuml
+abstract class Empleado {
+    {abstract} +getSueldoBasico(): real
+    {abstract} +getSueldoAdicional(): real
+    +getDescuento(): real
+    +sueldo(): real
+}
+
+abstract class EmpleadoConFamilia extends Empleado {
+    -cantidadHijos: int
+    -casado: boolean
+
+    +getSueldoAdicional(): real
+    {abstract} +getSueldoBasico(): real
+    {abstract} +getSuma(): real
+}
+
+class EmpleadoPasante extends Empleado {
+    -examenesRendidos: int
+    +getSueldoBasico(): real
+    +getSueldoAdicional(): real
+}
+
+class EmpleadoTemporario extends EmpleadoConFamilia {
+    -horasTrabajadas: int
+    +getSueldoBasico(): real
+    +getSuma(): real
+}
+
+class Planta extends EmpleadoConFamilia {
+    -antiguedad: int
+    +getSueldoBasico(): real
+    +getSuma(): real
+}
+@enduml
