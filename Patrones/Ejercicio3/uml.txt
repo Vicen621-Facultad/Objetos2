@@ -1,0 +1,34 @@
+@startuml
+class MediaPlayer {
+    +play()
+}
+
+class Media {
+    +play()
+}
+
+class Audio extends Media {
+    +play()
+}
+
+class VideoFile extends Media {
+    +play()
+}
+
+class VideoStream {
+    +reproduce()
+}
+
+class VideoStreamAdapater extends Media {
+    +play()
+}
+
+note top of VideoStreamAdapater
+    play() {
+        videoStream.reproduce();
+    }
+end note
+
+MediaPlayer --> Media: media *
+VideoStreamAdapater --> VideoStream
+@enduml

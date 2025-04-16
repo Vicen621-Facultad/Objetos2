@@ -1,0 +1,41 @@
+@startuml
+class Decoder {
+    +getSuggestions(): Movie[]
+    +setStrategy(SuggestionStrategy)
+}
+note right: Context
+
+class Movie {
+    -title: String
+    -year: int
+    -rating: double
+    + <<constructor>> Movie(String, int, double)
+}
+
+interface SuggestionStrategy {
+    +suggestMovies(Movie[], Movie[]): Movie[]
+}
+note top: Strategy
+
+class NoveltySugesstionStrategy implements SuggestionStrategy {
+    +suggestMovies(Movie[], Movie[]): Movie[]
+}
+note bottom: ConcreteStrategyA
+
+class SimilaritySuggestionStrategy implements SuggestionStrategy {
+    +suggestMovies(Movie[], Movie[]): Movie[]
+}
+note bottom: ConcreteStrategyB
+
+class RatingSuggestionStrategy implements SuggestionStrategy {
+    +suggestMovies(Movie[], Movie[]): Movie[]
+}
+
+note bottom: ConcreteStrategyC
+
+
+Movie --> Movie: similarMovies *
+Decoder --> Movie: movies *
+Decoder --> Movie: watchedMovies *
+Decoder o--> SuggestionStrategy: strategy
+@enduml

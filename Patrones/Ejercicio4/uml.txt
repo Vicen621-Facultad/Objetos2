@@ -1,0 +1,70 @@
+@startuml
+class ToDoItem {
+    -name: String
+    -startTime: LocalDate
+    -endTime: LocalDate
+    -comments: String[]
+
+    +<<constructor>> ToDoItem(String)
+    +start()
+    +togglePause()
+    +finish()
+    +workedTime()
+    +addComment(String)
+    +getName(): String
+    +getStartTime(): LocalDate
+    +getEndTime(): LocalDate
+    +hasEndTime(): boolean
+    #addCommentStates(String)
+    #setState(ToDoState)
+    #setEndTime(LocalDate)
+}
+note right: Context
+
+interface ToDoState {
+    +start(ToDoItem)
+    +togglePause(ToDoItem)
+    +finish(ToDoItem)
+    +workedTime(ToDoItem)
+    +addComment(ToDoItem)
+}
+note right: State
+
+class PendingState implements ToDoState {
+    +start(ToDoItem)
+    +togglePause(ToDoItem)
+    +finish(ToDoItem)
+    +workedTime(ToDoItem)
+    +addComment(ToDoItem)
+}
+note bottom: ConcreteStateA
+
+class InProgressState implements ToDoState {
+    +start(ToDoItem)
+    +togglePause(ToDoItem)
+    +finish(ToDoItem)
+    +workedTime(ToDoItem)
+    +addComment(ToDoItem)
+}
+note bottom: ConcreteStateB
+
+class PausedState implements ToDoState {
+    +start(ToDoItem)
+    +togglePause(ToDoItem)
+    +finish(ToDoItem)
+    +workedTime(ToDoItem)
+    +addComment(ToDoItem)
+}
+note bottom: ConcreteStateC
+
+class FinishedState implements ToDoState {
+    +start(ToDoItem)
+    +togglePause(ToDoItem)
+    +finish(ToDoItem)
+    +workedTime(ToDoItem)
+    +addComment(ToDoItem)
+}
+note bottom: ConcreteStateD
+
+ToDoItem o--> ToDoState: state
+@enduml
