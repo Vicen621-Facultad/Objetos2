@@ -5,10 +5,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class FinishedState implements ToDoState {
-    private LocalDate endTime;
-
-    public FinishedState() {
-        endTime = LocalDate.now();
+    public FinishedState(ToDoItem item) {
+        item.setEndTime(LocalDate.now());
     }
 
     @Override
@@ -24,7 +22,7 @@ public class FinishedState implements ToDoState {
 
     @Override
     public Duration workedTime(ToDoItem item) {
-        return Duration.ofDays(ChronoUnit.DAYS.between(item.getStartTime(), endTime));
+        return Duration.ofDays(ChronoUnit.DAYS.between(item.getStartTime(), item.getEndTime()));
     }
 
     @Override

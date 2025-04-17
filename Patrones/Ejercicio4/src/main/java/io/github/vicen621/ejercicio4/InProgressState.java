@@ -15,7 +15,7 @@ public class InProgressState implements ToDoState {
 
     @Override
     public void finish(ToDoItem item) {
-        item.setState(new FinishedState());
+        item.setState(new FinishedState(item));
     }
 
     @Override

@@ -9,12 +9,14 @@ public class ToDoItem {
     private String name;
     private ToDoState state;
     private LocalDate startTime;
+    private LocalDate endTime;
     private List<String> comments;
 
     public ToDoItem(String name) {
         this.name = name;
         this.state = new PendingState();
         this.startTime = LocalDate.now();
+        this.endTime = null;
         this.comments = new ArrayList<>();
     }
 
@@ -77,6 +79,14 @@ public class ToDoItem {
 
     public LocalDate getStartTime() {
         return startTime;
+    }
+
+    protected void setEndTime(LocalDate endTime) {
+        this.endTime = endTime;
+    }
+
+    public LocalDate getEndTime() {
+        return endTime;
     }
 
     public List<String> getComments() {

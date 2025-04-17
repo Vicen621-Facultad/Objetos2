@@ -1,0 +1,46 @@
+class Excursion {
+    -nombre: String
+    -precio: real
+    -FechaIni: LocalDate
+    -fechaFin: LocalDate
+    -punto: String
+    -cupoMinimo: int
+    -cupoMaximo: int
+
+    +inscribir(User)
+    +obtenerInformacion(): String
+}
+
+interface ExcursionState {
+    +inscribir(User, Excursion)
+    +obtenerInformacion(Excursion): String
+
+}
+
+class BajoCupoMinimo extends ExcursionState {
+    +inscribir(User, Excursion)
+    +obtenerInformacion(Excursion): String
+}
+
+class EntreCupos extends ExcursionState {
+    +inscribir(User, Excursion)
+    +obtenerInformacion(Excursion): String
+}
+
+class SobreCupoMaximo extends ExcursionState {
+    +inscribir(User, Excursion)
+    +obtenerInformacion(Excursion): String
+}
+
+class User {
+    -nombre: String
+    -apellido: String
+    -email: String
+}
+
+Excursion o--> ExcursionState: state
+Excursion --> User: inscriptos *
+Excursion --> User: listaEspera *
+
+
+@enduml
