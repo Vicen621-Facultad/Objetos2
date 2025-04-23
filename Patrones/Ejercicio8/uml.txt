@@ -1,0 +1,56 @@
+@startuml
+class Dispositivo {
+    +send(data: String): String
+    +conectarCon(connection: Connection): void
+    +configurarCRC(crc: CRC): void
+}
+
+interface CRC {
+    +crcFor(data: String): Integer
+}
+
+class CRC16_Calculator implements CRC {
+    +crcFor(data: String): Integer
+}
+
+class CRC32_Calculator implements CRC {
+    +crcFor(data: String): integer
+}
+
+class Ringer {
+    +ring(): void
+}
+
+interface Connection {
+    +sendData(data: String, crc: Integer): String
+    +pict(): String
+}
+
+class WifiConn implements Connection {
+    -pict: String
+
+    +sendData(data: String, crc: Integer): String
+    +pict(): String
+}
+
+class 4GConnectionAdapter implements Connection {
+    +sendData(data: String, crc: Integer): String
+    +pict(): String
+}
+
+class 4GConnection {
+    -symb: String
+    +transmit(data: String, crc: Integer): String
+}
+
+class Display {
+    +showBanner(img: String): String
+}
+
+Dispositivo --> CRC: crcCalculator
+Dispositivo --> Connection: connection
+Dispositivo --> Ringer: ringer
+Dispositivo --> Display: display
+
+4GConnectionAdapter --> 4GConnection: adaptee
+@enduml

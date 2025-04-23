@@ -1,0 +1,38 @@
+@startuml
+class Director <<director>> {
+    +makeClasico(Builder)
+    +makeVegetariano(Builder)
+    +makeVegano(Builder)
+    +makeSinTacc(Builder)
+}
+
+interface Builder <<builder>> {
+    +reset(): void
+    +setPan(real): void
+    +setAderezo(real): void
+    +setPrincipal(real): void
+    +setAdicional(real): void
+}
+
+class SandwichBuilder <<ConcreteBuilder>> implements Builder {
+    +reset(): void
+    +setPan(real): void
+    +setAderezo(real): void
+    +setPrincipal(real): void
+    +setAdicional(real): void
+    +getResult(): Sandwich
+}
+
+
+class Sandwich <<Product>> {
+    -pan: real
+    -aderezo: real
+    -principal: real
+    -adicional: real
+
+    +calcularPrecio(): real
+}
+
+Director --> Builder
+SandwichBuilder *--> Sandwich
+@enduml

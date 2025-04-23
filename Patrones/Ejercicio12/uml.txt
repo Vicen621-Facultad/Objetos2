@@ -1,0 +1,42 @@
+@startuml
+class FileSystem<<client>> {
+    +tamanoTotalOcupado(): int
+    +archivoMasGrande: File
+    +archivoMasNuevo: File
+    +buscar(nombre: String): IFile
+    +buscarTodos(nombre: String): IFile[]
+    +listadoDeContenido(): String
+}
+
+interface IFile<<component>> {
+    +getSize(): double
+    +addChild(): void
+    +removeChild(): void
+    +getChilds(): IFile[]
+}
+
+class File<<leaf>> implements IFile {
+    -nombre: String
+    -size: double
+    -creacion: LocalDate
+
+    +getSize(): double
+    +addChild(): void
+    +removeChild(): void
+    +getChilds(): IFile[]
+}
+
+class Folder<<composite>> implements IFile {
+    -nombre: String
+    -creacion: LocalDate
+
+    +getSize(): double
+    +addChild(): void
+    +removeChild(): void
+    +getChilds(): IFile[]
+}
+
+FileSystem --> IFile: root
+Folder *--> IFile: childs
+
+@enduml

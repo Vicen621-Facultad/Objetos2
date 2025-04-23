@@ -1,0 +1,49 @@
+@startuml
+interface Topografia {
+    +proporcionAgua(): real
+    +proporcionTierra(): real
+    +addChild(Topografia): void
+    +removeChild(Topografia): void
+    +getChilds(): Topografia[]
+    +equals(Topografia): boolean
+}
+
+
+class Agua <<leaf>> implements Topografia {
+    +proporcionAgua(): real
+    +proporcionTierra(): real
+    +addChild(Topografia): void
+    +removeChild(Topografia): void
+    +getChilds(): Topografia[]
+    +equals(Topografia): boolean
+}
+
+class Tierra <<leaf>> implements Topografia {
+    +proporcionAgua(): real
+    +proporcionTierra(): real
+    +addChild(Topografia): void
+    +removeChild(Topografia): void
+    +getChilds(): Topografia[]
+    +equals(Topografia): boolean
+}
+
+class Pantano <<leaf>> implements Topografia {
+    +proporcionAgua(): real
+    +proporcionTierra(): real
+    +addChild(Topografia): void
+    +removeChild(Topografia): void
+    +getChilds(): Topografia[]
+    +equals(Topografia): boolean
+}
+
+class Mixta <<composite>> implements Topografia {
+    +proporcionAgua(): real
+    +proporcionTierra(): real
+    +addChild(Topografia): void
+    +removeChild(Topografia): void
+    +getChilds(): Topografia[]
+    +equals(Topografia): boolean
+}
+
+Mixta *--> Topografia: childs
+@enduml
