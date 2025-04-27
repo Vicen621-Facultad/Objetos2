@@ -1,0 +1,74 @@
+@startuml
+class Calculadora {
+    +getResultado(): String
+    +borrar(): void
+    +setValor(double): void
+    +mas(): void
+    +menos(): void
+    +por(): void
+    +dividido(): void
+}
+
+interface State {
+    +getResultado(Calculadora): String
+    +borrar(Calculadora): void
+    +setValor(Calculadora, double): void
+    +mas(Calculadora): void
+    +menos(Calculadora): void
+    +por(Calculadora): void
+    +dividido(Calculadora): void
+}
+
+class ErrorState implements State {
+    +getResultado(Calculadora): String
+    +borrar(Calculadora): void
+    +setValor(Calculadora, double): void
+    +mas(Calculadora): void
+    +menos(Calculadora): void
+    +por(Calculadora): void
+    +dividido(Calculadora): void
+}
+
+class WaitingValueState implements State {
+    +getResultado(Calculadora): String
+    +borrar(Calculadora): void
+    +setValor(Calculadora, double): void
+    +mas(Calculadora): void
+    +menos(Calculadora): void
+    +por(Calculadora): void
+    +dividido(Calculadora): void
+}
+
+class WaitingInstructionState implements State {
+    +getResultado(Calculadora): String
+    +borrar(Calculadora): void
+    +setValor(Calculadora, double): void
+    +mas(Calculadora): void
+    +menos(Calculadora): void
+    +por(Calculadora): void
+    +dividido(Calculadora): void
+}
+
+interface Operacion {
+    +operar(double, double): double
+}
+
+class Suma implements Operacion {
+    +operar(double, double): double
+}
+
+class Resta implements Operacion {
+    +operar(double, double): double
+}
+
+class Multiplicacion implements Operacion {
+    +operar(double, double): double
+}
+
+class Division implements Operacion {
+    +operar(double, double): double
+}
+
+Calculadora *--> State: state
+WaitingValueState --> Operacion: operacionPendiente
+@enduml
