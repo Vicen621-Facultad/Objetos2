@@ -1,15 +1,20 @@
 @startuml
 class FileSystem<<client>> {
-    +tamanoTotalOcupado(): int
-    +archivoMasGrande: File
-    +archivoMasNuevo: File
-    +buscar(nombre: String): IFile
-    +buscarTodos(nombre: String): IFile[]
-    +listadoDeContenido(): String
+    +totalSizeOcuped(): int
+    +getBiggestFile(): File
+    +getNewestFile(): File
+    +search(nombre: String): IFile
+    +searchAll(nombre: String): IFile[]
+    +listContent(): String
 }
 
 interface IFile<<component>> {
     +getSize(): double
+    +getBiggestFile(): File
+    +getNewestFile(): File
+    +search(String): IFile
+    +searchAll(String): IFile[]
+    +listContent(): String
     +addChild(): void
     +removeChild(): void
     +getChilds(): IFile[]
@@ -21,6 +26,11 @@ class File<<leaf>> implements IFile {
     -creacion: LocalDate
 
     +getSize(): double
+    +getBiggestFile(): File
+    +getNewestFile(): File
+    +search(String): IFile
+    +searchAll(String): IFile[]
+    +listContent(): String
     +addChild(): void
     +removeChild(): void
     +getChilds(): IFile[]
@@ -31,6 +41,11 @@ class Folder<<composite>> implements IFile {
     -creacion: LocalDate
 
     +getSize(): double
+    +getBiggestFile(): File
+    +getNewestFile(): File
+    +search(String): IFile
+    +searchAll(String): IFile[]
+    +listContent(): String
     +addChild(): void
     +removeChild(): void
     +getChilds(): IFile[]

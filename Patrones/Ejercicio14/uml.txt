@@ -1,0 +1,47 @@
+@startuml
+abstract class Bien<<component>> {
+    -liquidez: real
+    
+    +getValorPrendario(): real
+    {abstract} +<<abstract>> getValor(): real
+}
+note right of Bien::getValorPrendario
+    template method
+end note
+
+note right of Bien::getValor()
+    abstract step
+end note
+
+class Automovil<<leaf>> extends Bien {
+    -modelo: int
+    -kilometraje: real
+    -costo0km: real
+    
+    +getValor(): real 
+}
+
+class Inmueble<<leaf>> extends Bien {
+    -direccion: String
+    -superficie: real
+    -costom2: real
+    
+    +getValor(): real
+}
+
+class Alquileres<<leaf>> extends Bien {
+    -comienzoContrato: LocalDate
+    -finContrato: LocalDate
+    -costoMensual: real
+    
+    +getValor(): real
+}
+
+class MultiplesBienes<<composite>> extends Bien {
+    +getValor(): real
+    +addChild(Bien): void
+    +removeChild(Bien): void
+}
+
+MultiplesBienes "1" O--> "*" Bien: bienes
+@enduml

@@ -1,0 +1,78 @@
+@startuml
+interface Producto<<interfaz>> {
+    +getConsumo(): real
+    +getPrecio(): real
+}
+
+class Componente<<leaf>> implements Producto {
+    -nombre: String
+    -descripcion: String
+    -precio: real
+    -consumo: real
+
+    +getNombre(): String
+    +getDescripcion(): String
+    +getPrecio(): real
+    +getConsumo(): real
+}
+
+class PC<<Product>><<composite>> implements Producto {
+    +getPrecio(): real
+    +getConsumo(): real
+    +setProcesador(): void
+    +setRam(): void
+    +setDisco(): void
+    +setGrafica(): void
+    +setGabinete(): void
+}
+
+interface Director<<Director>> {
+    +buildPC(Builder): void
+}
+
+class BasicDirector<<ConcreteDirector>> implements Director {
+    +buildPC(Builder): void
+}
+
+class IntermediateDirector<<ConcreteDirector>> implements Director {
+    +buildPC(Builder): void
+}
+
+class GamerDirector<<ConcreteDirector>> implements Director {
+    +buildPC(Builder): void
+}
+
+
+interface Builder<<builder>> {
+    +reset(): void
+    +setProcesador(Componente): void
+    +setMemoriaRam(Componente): void
+    +setDisco(Componente): void
+    +setTarjetaGrafica(Componente): void
+    +setGabinete(Componente): void
+    +setFuente(Componente): void
+    +getConsumo(): real
+}
+
+class PCBuilder<<ConcreteBuilder>> implements Builder {
+    +reset(): void
+    +setProcesador(Componente): void
+    +setMemoriaRam(Componente): void
+    +setDisco(Componente): void
+    +setTarjetaGrafica(Componente): void
+    +setGabinete(Componente): void
+    +setFuente(Componente): void
+    +getConsumo(): real
+    +getResult(): PC
+}
+note right of PCBuilder::getConsumo()
+    Tengo que poner el getConsumo
+    porque tengo que calcular
+    el consumo en el Director
+    para sacar la fuente gamer
+end note
+
+PCBuilder O--> PC: pc
+Director ..> Builder: <<uses>>
+PC "*" O--> "*" Componente: componentes
+@enduml
