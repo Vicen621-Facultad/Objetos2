@@ -1,0 +1,44 @@
+class PNGFilterLauncher {
+    -filters: Map<String, Filter>
+    -inputFile: File
+    -outputFile: File
+    +main(String[]): void
+    #processArgs(String[]): void
+    #initializeFilters(): void
+}
+
+abstract class Filter {
+    +filter(BufferedImage): BufferedImage
+}
+
+class Artifacter extends Filter {
+    +{static} tempFile: File
+    +{static} compressionQuality: float
+    +filter(BufferedImage): BufferedImage
+}
+
+class Dull extends Filter {
+    +filter(BufferedImage): BufferedImage
+}
+
+class Rainbow extends Filter {
+    +filter(BufferedImage): BufferedImage
+}
+
+class Rainbow extends Filter {
+    +{static} X_REPEAT: int
+    +{static} Y_REPEAT: int
+    +filter(BufferedImage): BufferedImage
+}
+
+class RGBShifter extends Filter {
+    +filter(BufferedImage): BufferedImage
+}
+
+class RGBShiftRepeater extends Filter {
+    +{static} X_REPEAT: int
+    +{static} Y_REPEAT: int
+    +filter(BufferedImage): BufferedImage
+}
+
+PNGFilterLauncher O--> Filter: filters

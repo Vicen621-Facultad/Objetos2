@@ -1,0 +1,19 @@
+interface DatabaseAccess {
+    +insertNewRow(String[]): int
+    +getSearchResults(String): String[]
+}
+
+class DatabaseRealAccess implements DatabaseAccess {
+    -database
+    +insertNewRow(String[]): int
+    +getSearchResults(String): String[]
+}
+
+class DatabaseProxy implements DatabaseAccess {
+    +DatabaseProxy(DatabaseRealAccess)
+    +checkAccess(): boolean
+    +insertNewRow(String[]): int
+    +getSearchResults(String): String[]
+}
+
+DatabaseProxy o--> DatabaseRealAccess: database

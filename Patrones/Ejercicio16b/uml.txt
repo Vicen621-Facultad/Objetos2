@@ -1,0 +1,65 @@
+interface ImageFilterPipeInterface {
+    +filter(BufferedImage): BufferedImage
+    +addFilter(ImageFilter): void
+    +setNextPipe(ImageFilterPipe): void
+    +addPipeFrom(ImageFilterPipe,ImageFilterPipe): void
+}
+
+class EndPipe implements ImageFilter, ImageFilterPipeInterface {
+    +filter(BufferedImage): BufferedImage
+    +addFilter(ImageFilter): void
+    +setNextPipe(ImageFilterPipe): void
+    +addPipeFrom(ImageFilterPipe,ImageFilterPipe): void
+}
+
+class ImageFilterPipe implements ImageFilter, ImageFilterPipeInterface {
+    +filter(BufferedImage): BufferedImage
+    +addFilter(ImageFilter): void
+    +setNextPipe(ImageFilterPipe): void
+    +addPipeFrom(ImageFilterPipe,ImageFilterPipe): void
+}
+
+interface ImageFilter {
+    +filter(BufferedImage): BufferedImage
+}
+
+abstract class AbstractFilter implements ImageFilter {
+    +{abstract} filter(BufferedImage): BufferedImage
+}
+
+class Artifacter extends AbstractFilter {
+    +{static} tempFile: File
+    +{static} compressionQuality: float
+    +filter(BufferedImage): BufferedImage
+}
+
+class Dull extends AbstractFilter {
+    +filter(BufferedImage): BufferedImage
+}
+
+class Rainbow extends AbstractFilter {
+    +filter(BufferedImage): BufferedImage
+}
+
+class Rainbow extends AbstractFilter {
+    +{static} X_REPEAT: int
+    +{static} Y_REPEAT: int
+    +filter(BufferedImage): BufferedImage
+}
+
+class RGBShifter extends AbstractFilter {
+    +filter(BufferedImage): BufferedImage
+}
+
+class RGBShiftRepeater extends AbstractFilter {
+    +{static} X_REPEAT: int
+    +{static} Y_REPEAT: int
+    +filter(BufferedImage): BufferedImage
+}
+
+class Monochrome extends AbstractFilter {
+    +filter(BufferedImage): BufferedImage
+}
+
+ImageFilterPipe --> ImageFilterPipeInterface: #nextPipe
+ImageFilterPipe --> ImageFilter: filter
