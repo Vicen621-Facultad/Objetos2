@@ -11,16 +11,16 @@ public class MixtaTest {
     @BeforeEach
     public void setUp() {
         Mixta mixta = new Mixta();
-        mixta.addChild(new Agua());
-        mixta.addChild(new Tierra());
-        mixta.addChild(new Tierra());
-        mixta.addChild(new Agua());
+        mixta.addChild(new Elemento(1));
+        mixta.addChild(new Elemento(0));
+        mixta.addChild(new Elemento(0));
+        mixta.addChild(new Elemento(1));
 
 
         topografia = new Mixta();
-        topografia.addChild(new Agua());
-        topografia.addChild(new Tierra());
-        topografia.addChild(new Tierra());
+        topografia.addChild(new Elemento(1));
+        topografia.addChild(new Elemento(0));
+        topografia.addChild(new Elemento(0));
         topografia.addChild(mixta);
     }
 
@@ -37,16 +37,16 @@ public class MixtaTest {
     @Test
     public void testEqualsMixta() {
         Mixta mixta = new Mixta();
-        mixta.addChild(new Pantano());
-        mixta.addChild(new Tierra());
-        mixta.addChild(new Tierra());
-        mixta.addChild(new Agua());
+        mixta.addChild(new Elemento(.75f));
+        mixta.addChild(new Elemento(0));
+        mixta.addChild(new Elemento(0));
+        mixta.addChild(new Elemento(1));
 
         Mixta mixta2 = new Mixta();
-        mixta2.addChild(new Pantano());
-        mixta2.addChild(new Tierra());
-        mixta2.addChild(new Tierra());
-        mixta2.addChild(new Agua());
+        mixta2.addChild(new Elemento(.75f));
+        mixta2.addChild(new Elemento(0));
+        mixta2.addChild(new Elemento(0));
+        mixta2.addChild(new Elemento(1));
 
         assertTrue(mixta.equals(mixta2));
     }
@@ -54,16 +54,16 @@ public class MixtaTest {
     @Test
     public void testNotEqualsMixta() {
         Mixta mixta = new Mixta(); // Tierra, pantano, tierra agua
-        mixta.addChild(new Tierra());
-        mixta.addChild(new Pantano());
-        mixta.addChild(new Tierra());
-        mixta.addChild(new Agua());
+        mixta.addChild(new Elemento(0));
+        mixta.addChild(new Elemento(.75f));
+        mixta.addChild(new Elemento(0));
+        mixta.addChild(new Elemento(1));
 
         Mixta mixta2 = new Mixta(); // Pantano, tierra, tierra, agua
-        mixta2.addChild(new Pantano());
-        mixta2.addChild(new Tierra());
-        mixta2.addChild(new Tierra());
-        mixta2.addChild(new Agua());
+        mixta2.addChild(new Elemento(.75f));
+        mixta2.addChild(new Elemento(0));
+        mixta2.addChild(new Elemento(0));
+        mixta2.addChild(new Elemento(1));
 
         assertFalse(mixta.equals(mixta2));
     }
