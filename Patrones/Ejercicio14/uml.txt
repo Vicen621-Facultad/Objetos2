@@ -43,5 +43,5 @@ class MultiplesBienes<<composite>> extends Bien {
     +removeChild(Bien): void
 }
 
-MultiplesBienes "1" O--> "*" Bien: bienes
+MultiplesBienes O--> "0..*" Bien: bienes
 @enduml

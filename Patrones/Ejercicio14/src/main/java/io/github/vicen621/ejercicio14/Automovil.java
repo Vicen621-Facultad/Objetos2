@@ -3,6 +3,7 @@ package io.github.vicen621.ejercicio14;
 import java.time.LocalDate;
 
 public class Automovil extends Bien {
+    private static final double REDUCCION_POR_ANIO = 0.1;
     private double costo0km;
     private int modelo;
     private double kilometraje;
@@ -16,7 +17,6 @@ public class Automovil extends Bien {
 
     @Override
     public double getValor() {
-        double REDUCCION_POR_ANIO = 0.1;
         return (REDUCCION_POR_ANIO * (LocalDate.now().getYear() - modelo)) * costo0km;
     }
 }

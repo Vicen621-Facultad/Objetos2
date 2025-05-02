@@ -1,5 +1,8 @@
 package io.github.vicen621.ejercicio14;
 
+import javax.management.Query;
+import javax.management.QueryExp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MultiplesBienes extends Bien {
@@ -7,12 +10,12 @@ public class MultiplesBienes extends Bien {
 
     public MultiplesBienes(List<Bien> bienes) {
         super(.5);
-        this.bienes = bienes;
+        this.bienes = new ArrayList<>(bienes);
     }
 
     @Override
     public double getValor() {
-        return bienes.stream().map(Bien::getValor).reduce(0.0, Double::sum);
+        return bienes.stream().mapToDouble(Bien::getValor).sum();
     }
 
     public void addChild(Bien child) {
