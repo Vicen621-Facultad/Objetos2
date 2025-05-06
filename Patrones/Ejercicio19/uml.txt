@@ -1,0 +1,52 @@
+interface WeatherData {
+    +getTemperatura(): real
+    +getPresion(): real
+    +getRadiacionSolar(): real
+    +getTemperaturas(): real[]
+    +displayData(): String
+}
+
+class HomeWeatherStation implements WeatherData {
+    +getTemperatura(): real
+    +getPresion(): real
+    +getRadiacionSolar(): real
+    +getTemperaturas(): real[]
+    +displayData(): String
+}
+
+class WeatherDecorator implements WeatherData {
+    +getTemperatura(): real
+    +getPresion(): real
+    +getRadiacionSolar(): real
+    +getTemperaturas(): real[]
+    +displayData(): String
+}
+
+class PromedioDecorator extends WeatherDecorator {
+    +displayData(): String
+    +displayPromedio(): String
+}
+
+class MaximoDecorator extends WeatherDecorator {
+    +displayData(): String
+    +displayMaximo(): String
+}
+
+class MinimoDecorator extends WeatherDecorator {
+    +displayData(): String
+    +displayMinimo(): String
+}
+
+interface TemperaturaStrategy {
+    +formatTemperature(double): String
+}
+
+class CelciusStrategy implements TemperaturaStrategy {
+    +formatTemperature(double): String
+}
+
+class FahrenheitStrategy implements TemperaturaStrategy {
+    +formatTemperature(double): String
+}
+
+WeatherDecorator o--> WeatherData: -componente

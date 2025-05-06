@@ -1,0 +1,80 @@
+class FileOO2 {
+    -nombre: String
+    -extension: String
+    -tamanio: int
+    -creacion: LocalDate
+    -modificacion: LocalDate
+    -permisos: String
+
+    +accesors()
+    +prettyPrint(): String
+}
+note left of FileOO2::prettyPrint
+    return strategy.prettyPrint(this);
+end note
+
+interface DisplayStrategy {
+    +prettyPrint(FileOO2): String
+}
+
+abstract class DisplayComponent implements DisplayStrategy {
+    +DisplayComponent(DisplayStrategy)
+    +prettyPrint(FileOO2): String
+    + {abstract} <<templateMethod>> printComponent(FileOO2): String
+}
+
+class NullDisplayComponent extends DisplayComponent {
+    +prettyPrint(FileOO2): String
+}
+
+class NombreDisplayComponent extends DisplayComponent {
+    +prettyPrint(FileOO2): String
+}
+
+class ExtensionDisplayComponent extends DisplayComponent {
+    +prettyPrint(FileOO2): String
+}
+
+class TamanioDisplayComponent extends DisplayComponent {
+    +prettyPrint(FileOO2): String
+}
+
+class CreacionDisplayComponent extends DisplayComponent {
+    +prettyPrint(FileOO2): String
+}
+
+class ModificacionDisplayComponent extends DisplayComponent {
+    +prettyPrint(FileOO2): String
+}
+
+class PermisosDisplayComponent extends DisplayComponent {
+    +prettyPrint(FileOO2): String
+}
+
+interface Builder<T> {
+    +reset(): void
+    +addCreacion(): Builder<T>
+    +addExtension(): Builder<T>
+    +addModificacion(): Builder<T>
+    +addNombre(): Builder<T>
+    +addPermisos(): Builder<T>
+    +addTamanio(): Builder<T>
+    +getResult(): T
+}
+
+class DisplayStrategyBuilder<<singleton>> implements Builder<DisplayStrategy> {
+    +reset(): void
+    +addCreacion(): Builder<DisplayStrategy>
+    +addExtension(): Builder<DisplayStrategy>
+    +addModificacion(): Builder<DisplayStrategy>
+    +addNombre(): Builder<DisplayStrategy>
+    +addPermisos(): Builder<DisplayStrategy>
+    +addTamanio(): Builder<DisplayStrategy>
+    +getResult(): DisplayStrategy
+    + {static} getInstance(): DisplayStrategyBuilder
+}
+
+DisplayComponent --> DisplayStrategy: #inner
+FileOO2 o--> DisplayStrategy: -strategy
+DisplayStrategyBuilder o--> DisplayStrategy: -result
+DisplayStrategyBuilder *--> DisplayStrategyBuilder: -<<static>> instance
