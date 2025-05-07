@@ -20,6 +20,7 @@ class WeatherDecorator implements WeatherData {
     +getRadiacionSolar(): real
     +getTemperaturas(): real[]
     +displayData(): String
+    +formatTemperatura(double): double
 }
 
 class PromedioDecorator extends WeatherDecorator {
@@ -50,3 +51,4 @@ class FahrenheitStrategy implements TemperaturaStrategy {
 }
 
 WeatherDecorator o--> WeatherData: -componente
+WeatherDecorator o--> TemperaturaStrategy: -strategy
