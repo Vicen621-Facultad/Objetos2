@@ -1,0 +1,111 @@
+interface Builder<<builder>> {
+    +reset(): void
+    +addWeapon(Weapon): void
+    +addArmor(Armor): void
+    +addAbility(String): void
+}
+
+abstract class CharacterBuilder implements Builder {
+    +getResult(): Character
+}
+
+class MagicianBuilder<<concrete builder>> extends CharacterBuilder {
+    +reset(): void
+    +addWeapon(Weapon): void
+    +addArmor(Armor): void
+    +addAbility(String): void
+}
+
+class WarriorBuilder<<concrete builder>> extends CharacterBuilder {
+    +reset(): void
+    +addWeapon(Weapon): void
+    +addArmor(Armor): void
+    +addAbility(String): void
+}
+
+class ArcherBuilder<<concrete builder>> extends CharacterBuilder {
+    +reset(): void
+    +addWeapon(Weapon): void
+    +addArmor(Armor): void
+    +addAbility(String): void
+}
+
+class ThoorBuilder<<concrete builder>> extends CharacterBuilder {
+    +reset(): void
+    +addWeapon(Weapon): void
+    +addArmor(Armor): void
+    +addAbility(String): void
+}
+
+class Director<<director>> {
+    +buildCharacter(Builder): void
+}
+
+class Character {
+    -abilities: String
+    -health: int
+
+    +accessors()
+    +attack(Character): void
+    +receiveAttackFromSword(): void
+    +receiveAttackFromBow(): void
+    +receiveAttackFromStick(): void
+}
+note left of Character::receiveAttackFromSword
+    health -= armor.getDamageFromSword();
+end note
+note left of Character::attack
+    weapon.attack(character);
+end note
+
+interface Armor {
+    +getDamageFromSword(): int
+    +getDamageFromBow(): int
+    +getDamageFromStick(): int
+}
+
+class LeatherArmor implements Armor {
+    +getDamageFromSword(): int → 8
+    +getDamageFromBow(): int → 5
+    +getDamageFromStick(): int → 2
+}
+
+class IronArmor implements Armor {
+    +getDamageFromSword(): int → 5
+    +getDamageFromBow(): int → 3
+    +getDamageFromStick(): int → 1
+}
+
+class SteelArmor implements Armor {
+    +getDamageFromSword(): int -> 3
+    +getDamageFromBow(): int -> 2
+    +getDamageFromStick(): int -> 1
+}
+
+interface Weapon {
+    +attack(Character): void
+}
+
+class Sword implements Weapon {
+    +attack(Character): void
+}
+
+class Bow implements Weapon {
+    +attack(Character): void
+}
+
+class Stick implements Weapon {
+    +attack(Character): void
+}
+
+class Hammer implements Weapon {
+    +attack(Character): void
+}
+note right of Hammer::attack
+    character.receiveDamageFromStick()
+end note
+
+Character --> Weapon: weapon
+Character --> Armor: armor
+Director ..> Builder: <<uses>>
+CharacterBuilder --> Character: character
