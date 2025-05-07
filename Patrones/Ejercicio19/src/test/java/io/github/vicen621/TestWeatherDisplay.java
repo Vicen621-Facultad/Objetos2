@@ -11,7 +11,10 @@ public class TestWeatherDisplay {
     @Test
     public void test_promedio_minimo_maximo() {
         WeatherData station = new HomeWeatherStation(86, 200, 1008);
-        WeatherData decorator = new MaximoDecorator(new MinimoDecorator(new PromedioDecorator(station, new CelciusStrategy()), new CelciusStrategy()), new CelciusStrategy());
+
+        WeatherData decorator = new PromedioDecorator(station, new CelciusStrategy());
+        decorator = new MinimoDecorator(decorator, new CelciusStrategy());
+        decorator = new MaximoDecorator(decorator, new CelciusStrategy());
 
         System.out.println(decorator.displayData());
     }
