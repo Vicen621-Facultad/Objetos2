@@ -1,6 +1,5 @@
 package ar.edu.unlp.oo2.persitencia;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
