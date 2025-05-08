@@ -1,4 +1,4 @@
-class FileOO2 {
+class FileOO2 implements IFile {
     -nombre: String
     -extension: String
     -tamanio: int
@@ -6,75 +6,55 @@ class FileOO2 {
     -modificacion: LocalDate
     -permisos: String
 
-    +accesors()
+    +getNombre(): String
+    +getExtension(): String
+    +getTamanio(): int
+    +getCreacion(): LocalDate
+    +getModificacion(): LocalDate
+    +getPermisos(): String
     +prettyPrint(): String
 }
-note left of FileOO2::prettyPrint
-    return strategy.prettyPrint(this);
-end note
 
-interface DisplayStrategy {
-    +prettyPrint(FileOO2): String
+interface IFile {
+    +getNombre(): String
+    +getExtension(): String
+    +getTamanio(): int
+    +getCreacion(): LocalDate
+    +getModificacion(): LocalDate
+    +getPermisos(): String
+    +prettyPrint(): String
 }
 
-abstract class DisplayComponent implements DisplayStrategy {
-    +DisplayComponent(DisplayStrategy)
-    +prettyPrint(FileOO2): String
-    + {abstract} <<templateMethod>> printComponent(FileOO2): String
+abstract class AbstractDecorator implements IFile {
+    +<<constructor>> AbstractDecorator(inner: IFile)
+    +getNombre(): String
+    +getExtension(): String
+    +getTamanio(): int
+    +getCreacion(): LocalDate
+    +getModificacion(): LocalDate
+    +getPermisos(): String
+    +prettyPrint(): String
+    + {abstract} <<abstract>>printComponent(): String
 }
 
-class NullDisplayComponent extends DisplayComponent {
-    +prettyPrint(FileOO2): String
+class ExtensionDecorator extends AbstractDecorator {
+    +printComponent(): String
 }
 
-class NombreDisplayComponent extends DisplayComponent {
-    +prettyPrint(FileOO2): String
+class TamanioDecorator extends AbstractDecorator {
+    +printComponent(): String
 }
 
-class ExtensionDisplayComponent extends DisplayComponent {
-    +prettyPrint(FileOO2): String
+class CreacionDecorator extends AbstractDecorator {
+    +printComponent(): String
 }
 
-class TamanioDisplayComponent extends DisplayComponent {
-    +prettyPrint(FileOO2): String
+class ModificacionDecorator extends AbstractDecorator {
+    +printComponent(): String
 }
 
-class CreacionDisplayComponent extends DisplayComponent {
-    +prettyPrint(FileOO2): String
+class PermisosDecorator extends AbstractDecorator {
+    +printComponent(): String
 }
 
-class ModificacionDisplayComponent extends DisplayComponent {
-    +prettyPrint(FileOO2): String
-}
-
-class PermisosDisplayComponent extends DisplayComponent {
-    +prettyPrint(FileOO2): String
-}
-
-interface Builder<T> {
-    +reset(): void
-    +addCreacion(): Builder<T>
-    +addExtension(): Builder<T>
-    +addModificacion(): Builder<T>
-    +addNombre(): Builder<T>
-    +addPermisos(): Builder<T>
-    +addTamanio(): Builder<T>
-    +getResult(): T
-}
-
-class DisplayStrategyBuilder<<singleton>> implements Builder<DisplayStrategy> {
-    +reset(): void
-    +addCreacion(): Builder<DisplayStrategy>
-    +addExtension(): Builder<DisplayStrategy>
-    +addModificacion(): Builder<DisplayStrategy>
-    +addNombre(): Builder<DisplayStrategy>
-    +addPermisos(): Builder<DisplayStrategy>
-    +addTamanio(): Builder<DisplayStrategy>
-    +getResult(): DisplayStrategy
-    + {static} getInstance(): DisplayStrategyBuilder
-}
-
-DisplayComponent --> DisplayStrategy: #inner
-FileOO2 o--> DisplayStrategy: -strategy
-DisplayStrategyBuilder o--> DisplayStrategy: -result
-DisplayStrategyBuilder *--> DisplayStrategyBuilder: -<<static>> instance
+AbstractDecorator --> IFile: -inner

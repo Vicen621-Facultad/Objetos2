@@ -1,18 +1,16 @@
 package io.github.vicen621;
 
-import io.github.vicen621.strategies.DisplayStrategy;
-import io.github.vicen621.strategies.NullDisplayComponent;
+import io.github.vicen621.decorators.IFile;
 
 import java.time.LocalDate;
 
-public class FileOO2 {
+public class FileOO2 implements IFile {
     private String nombre;
     private String extension;
     private int tamanio;
     private LocalDate creacion;
     private LocalDate modificacion;
     private String permisos;
-    private DisplayStrategy strategy;
 
     public FileOO2(String nombre, String extension, String permisos) {
         this.nombre = nombre;
@@ -21,15 +19,10 @@ public class FileOO2 {
         this.tamanio = 0;
         this.creacion = LocalDate.now();
         this.modificacion = LocalDate.now();
-        this.strategy = new NullDisplayComponent();
     }
 
     public String prettyPrint() {
-        return strategy.prettyPrint(this);
-    }
-
-    public void setStrategy(DisplayStrategy strategy) {
-        this.strategy = strategy;
+        return this.getNombre();
     }
 
     public String getNombre() {

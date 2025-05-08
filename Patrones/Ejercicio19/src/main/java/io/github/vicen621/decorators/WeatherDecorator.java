@@ -1,55 +1,40 @@
 package io.github.vicen621.decorators;
 
 import io.github.vicen621.WeatherData;
-import io.github.vicen621.strategies.FahrenheitStrategy;
-import io.github.vicen621.strategies.TemperatureStrategy;
 
 import java.util.List;
 
-//TODO: No se como hacer lo de los celcius
 public abstract class WeatherDecorator implements WeatherData {
-    private WeatherData componente;
-    private TemperatureStrategy strategy;
+    private WeatherData inner;
 
-    public WeatherDecorator(WeatherData componente, TemperatureStrategy strategy) {
-        this.componente = componente;
-        this.strategy = strategy;
-    }
-
-    public WeatherDecorator(WeatherData componente) {
-        this(componente, new FahrenheitStrategy());
+    public WeatherDecorator(WeatherData inner) {
+        this.inner = inner;
     }
 
     @Override
     public double getTemperatura() {
-        return componente.getTemperatura();
+        return inner.getTemperatura();
     }
 
     @Override
     public double getPresion() {
-        return componente.getPresion();
+        return inner.getPresion();
     }
 
     @Override
     public double getRadiacionSolar() {
-        return componente.getRadiacionSolar();
+        return inner.getRadiacionSolar();
     }
 
     @Override
     public List<Double> getTemperaturas() {
-        return componente.getTemperaturas();
+        return inner.getTemperaturas();
     }
 
     @Override
     public String displayData() {
-        return componente.displayData();
+        return inner.displayData() + displayDecorator();
     }
 
-    public void setStrategy(TemperatureStrategy strategy) {
-        this.strategy = strategy;
-    }
-
-    public double formatTemperature(double fahrenheit) {
-        return strategy.format(fahrenheit);
-    }
+    public abstract String displayDecorator();
 }
