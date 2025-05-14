@@ -12,16 +12,7 @@ public class Empresa {
 	static double descuentoFis = 0;
 
 	public boolean agregarNumeroTelefono(String str) {
-		boolean encontre = guia.getLineas().contains(str);
-		if (!encontre) {
-			guia.getLineas().add(str);
-			encontre= true;
-			return encontre;
-		}
-		else {
-			encontre= false;
-			return encontre;
-		}
+		return guia.getLineas().add(str);
 	}
 
 	public String obtenerNumeroLibre() {
