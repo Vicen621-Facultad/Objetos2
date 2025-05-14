@@ -29,6 +29,7 @@ public class Empresa {
 			var.setTipo(tipo);
 			var.setNumeroTelefono(tel);
 			var.setDNI(data);
+			var.setDescuento(descuentoFis);
 		}
 		else if (tipo.equals("juridica")) {
 			String tel = this.obtenerNumeroLibre();
@@ -36,6 +37,7 @@ public class Empresa {
 			var.setTipo(tipo);
 			var.setNumeroTelefono(tel);
 			var.setCuit(data);
+			var.setDescuento(descuentoJur);
 		}
 		clientes.add(var);
 		return var;

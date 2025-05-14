@@ -10,36 +10,16 @@ public class Cliente {
 	private String numeroTelefono;
 	private String cuit;
 	private String dni;
+	private double descuento;
 
-	public String getTipo() {
-		return tipo;
-	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getNumeroTelefono() {
-		return numeroTelefono;
-	}
-	public void setNumeroTelefono(String numeroTelefono) {
-		this.numeroTelefono = numeroTelefono;
-	}
-	public String getCuit() {
-		return cuit;
-	}
-	public void setCuit(String cuit) {
-		this.cuit = cuit;
-	}
-	public String getDNI() {
-		return dni;
-	}
-	public void setDNI(String dni) {
-		this.dni = dni;
+	public double calcularMontoTotalLlamadas() {
+		double c = 0;
+		for (Llamada l : getLlamadas()) {
+			double auxc = l.calcularPrecioLlamada();
+			auxc -= auxc * getDescuento();
+			c += auxc;
+		}
+		return c;
 	}
 
 	public List<Llamada> getLlamadas() {
@@ -50,18 +30,51 @@ public class Cliente {
 		this.llamadas = llamadas;
 	}
 
-	public double calcularMontoTotalLlamadas() {
-		double c = 0;
-		for (Llamada l : getLlamadas()) {
-			double auxc = l.calcularPrecioLlamada();
+	public String getTipo() {
+		return tipo;
+	}
 
-			if (getTipo() == "fisica") {
-				auxc -= auxc* Empresa.descuentoFis;
-			} else if(getTipo() == "juridica") {
-				auxc -= auxc* Empresa.descuentoJur;
-			}
-			c += auxc;
-		}
-		return c;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getNumeroTelefono() {
+		return numeroTelefono;
+	}
+
+	public void setNumeroTelefono(String numeroTelefono) {
+		this.numeroTelefono = numeroTelefono;
+	}
+
+	public String getCuit() {
+		return cuit;
+	}
+
+	public void setCuit(String cuit) {
+		this.cuit = cuit;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDNI(String dni) {
+		this.dni = dni;
+	}
+
+	public double getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(double descuento) {
+		this.descuento = descuento;
 	}
 }
