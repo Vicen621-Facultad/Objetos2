@@ -49,29 +49,7 @@ public class Empresa {
 	}
 
 	public double calcularMontoTotalLlamadas(Cliente cliente) {
-		return calcularMontoTotalLlamadas2(cliente);
-	}
-
-	private double calcularMontoTotalLlamadas2(Cliente cliente) {
-		double c = 0;
-		for (Llamada l : cliente.getLlamadas()) {
-			double auxc = 0;
-			if (l.getTipoDeLlamada() == "nacional") {
-				// el precio es de 3 pesos por segundo más IVA sin adicional por establecer la llamada
-				auxc += l.getDuracion() * 3 + (l.getDuracion() * 3 * 0.21);
-			} else if (l.getTipoDeLlamada() == "internacional") {
-				// el precio es de 150 pesos por segundo más IVA más 50 pesos por establecer la llamada
-				auxc += l.getDuracion() * 150 + (l.getDuracion() * 150 * 0.21) + 50;
-			}
-
-			if (cliente.getTipo() == "fisica") {
-				auxc -= auxc*descuentoFis;
-			} else if(cliente.getTipo() == "juridica") {
-				auxc -= auxc*descuentoJur;
-			}
-			c += auxc;
-		}
-		return c;
+		return cliente.calcularMontoTotalLlamadas();
 	}
 
 	public int cantidadDeUsuarios() {

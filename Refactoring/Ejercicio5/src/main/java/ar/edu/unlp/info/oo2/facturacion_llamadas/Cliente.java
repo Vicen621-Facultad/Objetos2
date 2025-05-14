@@ -49,4 +49,26 @@ public class Cliente {
 	public void setLlamadas(List<Llamada> llamadas) {
 		this.llamadas = llamadas;
 	}
+
+	public double calcularMontoTotalLlamadas() {
+		double c = 0;
+		for (Llamada l : getLlamadas()) {
+			double auxc = 0;
+			if (l.getTipoDeLlamada() == "nacional") {
+				// el precio es de 3 pesos por segundo más IVA sin adicional por establecer la llamada
+				auxc += l.getDuracion() * 3 + (l.getDuracion() * 3 * 0.21);
+			} else if (l.getTipoDeLlamada() == "internacional") {
+				// el precio es de 150 pesos por segundo más IVA más 50 pesos por establecer la llamada
+				auxc += l.getDuracion() * 150 + (l.getDuracion() * 150 * 0.21) + 50;
+			}
+
+			if (getTipo() == "fisica") {
+				auxc -= auxc* Empresa.descuentoFis;
+			} else if(getTipo() == "juridica") {
+				auxc -= auxc* Empresa.descuentoJur;
+			}
+			c += auxc;
+		}
+		return c;
+	}
 }
