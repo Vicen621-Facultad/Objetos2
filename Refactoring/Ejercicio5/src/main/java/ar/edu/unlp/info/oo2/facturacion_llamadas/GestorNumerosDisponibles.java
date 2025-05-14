@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 public class GestorNumerosDisponibles {
     private final SortedSet<String> lineas = new TreeSet<>();
+	// test
     private String tipoGenerador = "ultimo";
 
     public SortedSet<String> getLineas() {
