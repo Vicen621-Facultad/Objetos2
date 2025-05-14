@@ -29,7 +29,7 @@ public class Llamada {
 		return origen;
 	}
 
-	public double calcularPrecioLlamada() {
+	public double calcularPrecio() {
 		double aux = 0;
 		if (getTipoDeLlamada() == "nacional") {
 			// el precio es de 3 pesos por segundo más IVA sin adicional por establecer la llamada
