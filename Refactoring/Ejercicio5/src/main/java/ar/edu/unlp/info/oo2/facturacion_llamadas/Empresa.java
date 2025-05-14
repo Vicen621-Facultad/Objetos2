@@ -1,5 +1,9 @@
 package ar.edu.unlp.info.oo2.facturacion_llamadas;
 
+import ar.edu.unlp.info.oo2.facturacion_llamadas.builder.Builder;
+import ar.edu.unlp.info.oo2.facturacion_llamadas.builder.ClientFisicaBuilder;
+import ar.edu.unlp.info.oo2.facturacion_llamadas.builder.ClientJuridicoBuilder;
+import ar.edu.unlp.info.oo2.facturacion_llamadas.builder.Director;
 import ar.edu.unlp.info.oo2.facturacion_llamadas.strategies.llamada.PrecioStrategy;
 
 import java.util.ArrayList;
@@ -23,24 +27,20 @@ public class Empresa {
 	}
 
 	public Cliente registrarUsuario(String data, String nombre, String tipo) {
-		Cliente var = new Cliente();
+		Cliente var = null;
+		String tel = this.obtenerNumeroLibre();
 		// builder
 		if (tipo.equals("fisica")) {
-			var.setNombre(nombre);
-			String tel = this.obtenerNumeroLibre();
-			var.setTipo(tipo);
-			var.setNumeroTelefono(tel);
-			var.setDNI(data);
-			var.setDescuento(descuentoFis);
+			ClientFisicaBuilder builder = new ClientFisicaBuilder();
+			new Director().createClient(builder, nombre, data, tel);
+			var = builder.getCliente();
 		}
 		else if (tipo.equals("juridica")) {
-			String tel = this.obtenerNumeroLibre();
-			var.setNombre(nombre);
-			var.setTipo(tipo);
-			var.setNumeroTelefono(tel);
-			var.setCuit(data);
-			var.setDescuento(descuentoJur);
+			ClientJuridicoBuilder builder = new ClientJuridicoBuilder();
+			new Director().createClient(builder, nombre, data, tel);
+			var = builder.getCliente();
 		}
+
 		clientes.add(var);
 		return var;
 	}
