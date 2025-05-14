@@ -1,0 +1,58 @@
+class Llamada {
+    -tipoLlamada: String
+    -origen: String
+    -destino: String
+    -duracion: int
+
+    +<<constructor>> Llamada(String, String, String, int)
+    +getTipoLlamada(): String
+    +getRemitente(): String
+    +getOrigen(): String
+    +getDuracion(): int
+}
+
+class GestorNumerosDisponibles {
+    -lineas: String[]
+    -tipoGenerador: String
+
+    +obtenerNumeroLibre(): String
+    +cambiarTipoGenerador(String): void
+}
+
+class Empresa {
+    #{static} descuentoJur: real = 0.15
+    #{static} descuentoFis: real = 0
+
+    +agregarNumeroTelefono(String): boolean
+    +obtenerNumeroLibre(): String
+    +registrarUsuario(String, String, String): Cliente
+    +registrarLlamada(Cliente, Cliente, String, int): Llamada
+    +calcularMontoTotalLlamadas(Cliente): real
+    +cantidadDeUsuarios(): int
+    +existeUsuario(Cliente): boolean
+    +getGestorNumeros(): GestorNumerosClientes
+}
+
+class Cliente {
+    -tipo: String
+    -nombre: String
+    -numeroTelefono: String
+    -cuit: String
+    -dni: String
+
+    +getTipo(): String
+    +getNombre(): String
+    +getNumeroTelefono(): String
+    +getCuit(): String
+    +getDni(): String
+    +setTipo(String): void
+    +setNombre(String): void
+    +setNumeroTelefono(String): void
+    +setCuit(String): void
+    +setDni(String): void
+}
+
+Cliente --> Llamada: +llamadas
+Empresa --> Llamada: -llamadas
+Empresa --> Cliente: -clientes
+Empresa --> GestorNumerosDisponibles: -guia
