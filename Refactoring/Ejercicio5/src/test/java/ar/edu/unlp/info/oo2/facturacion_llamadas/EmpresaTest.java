@@ -2,6 +2,8 @@ package ar.edu.unlp.info.oo2.facturacion_llamadas;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import ar.edu.unlp.info.oo2.facturacion_llamadas.strategies.llamada.InternationalCall;
+import ar.edu.unlp.info.oo2.facturacion_llamadas.strategies.llamada.NationalCall;
 import ar.edu.unlp.info.oo2.facturacion_llamadas.strategies.numeros.FirstNumerosStrategy;
 import ar.edu.unlp.info.oo2.facturacion_llamadas.strategies.numeros.RandomNumerosStrategy;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,14 +30,14 @@ class EmpresaTest {
 		Cliente emisorPersonaJuridica = sistema.registrarUsuario("17555222", "Nvidia Corp" , "juridica");
 		Cliente remitentePersonaJuridica = sistema.registrarUsuario("25765432", "Sun Microsystems" , "juridica");
 
-		this.sistema.registrarLlamada(emisorPersonaJuridica, remitentePersonaFisica, "nacional", 10);
-		this.sistema.registrarLlamada(emisorPersonaJuridica, remitentePersonaFisica, "internacional", 8);
-		this.sistema.registrarLlamada(emisorPersonaJuridica, remitentePersonaJuridica, "nacional", 5);
-		this.sistema.registrarLlamada(emisorPersonaJuridica, remitentePersonaJuridica, "internacional", 7);
-		this.sistema.registrarLlamada(emisorPersonaFisca, remitentePersonaFisica, "nacional", 15);
-		this.sistema.registrarLlamada(emisorPersonaFisca, remitentePersonaFisica, "internacional", 45);
-		this.sistema.registrarLlamada(emisorPersonaFisca, remitentePersonaJuridica, "nacional", 13);
-		this.sistema.registrarLlamada(emisorPersonaFisca, remitentePersonaJuridica, "internacional", 17);
+		this.sistema.registrarLlamada(emisorPersonaJuridica, remitentePersonaFisica, new NationalCall(), 10);
+		this.sistema.registrarLlamada(emisorPersonaJuridica, remitentePersonaFisica, new InternationalCall(), 8);
+		this.sistema.registrarLlamada(emisorPersonaJuridica, remitentePersonaJuridica, new NationalCall(), 5);
+		this.sistema.registrarLlamada(emisorPersonaJuridica, remitentePersonaJuridica, new InternationalCall(), 7);
+		this.sistema.registrarLlamada(emisorPersonaFisca, remitentePersonaFisica, new NationalCall(), 15);
+		this.sistema.registrarLlamada(emisorPersonaFisca, remitentePersonaFisica, new InternationalCall(), 45);
+		this.sistema.registrarLlamada(emisorPersonaFisca, remitentePersonaJuridica, new NationalCall(), 13);
+		this.sistema.registrarLlamada(emisorPersonaFisca, remitentePersonaJuridica, new InternationalCall(), 17);
 
 		assertEquals(11454.64, this.sistema.calcularMontoTotalLlamadas(emisorPersonaFisca), 0.01);
 		assertEquals(2445.40, this.sistema.calcularMontoTotalLlamadas(emisorPersonaJuridica), 0.01);

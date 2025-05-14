@@ -1,5 +1,7 @@
 package ar.edu.unlp.info.oo2.facturacion_llamadas;
 
+import ar.edu.unlp.info.oo2.facturacion_llamadas.strategies.llamada.PrecioStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +45,8 @@ public class Empresa {
 		return var;
 	}
 
-	public Llamada registrarLlamada(Cliente origen, Cliente destino, String t, int duracion) {
-		Llamada llamada = new Llamada(t, origen.getNumeroTelefono(), destino.getNumeroTelefono(), duracion);
+	public Llamada registrarLlamada(Cliente origen, Cliente destino, PrecioStrategy tipo, int duracion) {
+		Llamada llamada = new Llamada(tipo, origen.getNumeroTelefono(), destino.getNumeroTelefono(), duracion);
 		llamadas.add(llamada);
 		origen.getLlamadas().add(llamada);
 		return llamada;
