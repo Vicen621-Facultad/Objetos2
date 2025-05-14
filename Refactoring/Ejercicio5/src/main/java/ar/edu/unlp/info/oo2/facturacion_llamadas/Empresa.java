@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Empresa {
 	private List<Cliente> clientes = new ArrayList<>();
+	// TODO: No se usa, habria que sacarla?
 	private List<Llamada> llamadas = new ArrayList<>();
 	private GestorNumerosDisponibles guia = new GestorNumerosDisponibles();
 
