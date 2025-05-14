@@ -2,6 +2,8 @@ package ar.edu.unlp.info.oo2.facturacion_llamadas;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import ar.edu.unlp.info.oo2.facturacion_llamadas.strategies.FirstStrategy;
+import ar.edu.unlp.info.oo2.facturacion_llamadas.strategies.RandomStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -56,10 +58,10 @@ class EmpresaTest {
 		// por defecto es el ultimo
 		assertEquals("2214444559", this.sistema.obtenerNumeroLibre());
 
-		this.sistema.getGestorNumeros().cambiarTipoGenerador("primero");
+		this.sistema.getGestorNumeros().cambiarTipoGenerador(new FirstStrategy());
 		assertEquals("2214444554", this.sistema.obtenerNumeroLibre());
 
-		this.sistema.getGestorNumeros().cambiarTipoGenerador("random");
+		this.sistema.getGestorNumeros().cambiarTipoGenerador(new RandomStrategy());
 		assertNotNull(this.sistema.obtenerNumeroLibre());
 	}
 }
