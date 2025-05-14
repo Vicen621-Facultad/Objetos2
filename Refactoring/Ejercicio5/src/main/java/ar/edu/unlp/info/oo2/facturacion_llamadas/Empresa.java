@@ -22,6 +22,7 @@ public class Empresa {
 
 	public Cliente registrarUsuario(String data, String nombre, String tipo) {
 		Cliente var = new Cliente();
+		// builder
 		if (tipo.equals("fisica")) {
 			var.setNombre(nombre);
 			String tel = this.obtenerNumeroLibre();
@@ -48,6 +49,10 @@ public class Empresa {
 	}
 
 	public double calcularMontoTotalLlamadas(Cliente cliente) {
+		return calcularMontoTotalLlamadas2(cliente);
+	}
+
+	private double calcularMontoTotalLlamadas2(Cliente cliente) {
 		double c = 0;
 		for (Llamada l : cliente.getLlamadas()) {
 			double auxc = 0;
