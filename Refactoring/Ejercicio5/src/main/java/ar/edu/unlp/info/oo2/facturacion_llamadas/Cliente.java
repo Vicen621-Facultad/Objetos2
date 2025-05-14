@@ -13,13 +13,7 @@ public class Cliente {
 	private double descuento;
 
 	public double calcularMontoTotalLlamadas() {
-		double c = 0;
-		for (Llamada l : getLlamadas()) {
-			double auxc = l.calcularPrecioLlamada();
-			auxc -= auxc * getDescuento();
-			c += auxc;
-		}
-		return c;
+		return getLlamadas().stream().mapToDouble(Llamada::calcularPrecio).sum() * (1 - getDescuento());
 	}
 
 	public List<Llamada> getLlamadas() {
