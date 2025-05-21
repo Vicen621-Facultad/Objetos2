@@ -17,7 +17,8 @@ public class UserRepository {
 				.filter(userData -> userData.get("username").equals(aUsername)).findFirst()
 				.map(userData -> new ProxyUser(
 						userData.get("username").toString(),
-						userData.get("email").toString()
+						userData.get("email").toString(),
+						new PostRepository()
 				))
 				.orElse(null);
 		} catch (Exception e) {
