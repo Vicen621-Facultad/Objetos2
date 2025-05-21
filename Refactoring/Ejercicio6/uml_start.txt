@@ -1,0 +1,17 @@
+class ArbolBinario {
+    -valor: integer
+
+    +<<create>> ArbolBinario(integer)
+    +getValor(): integer
+    +setValor(integer): void
+    +getHijoIzquierdo(): ArbolBinario
+    +getHijoDerecho(): ArbolBinario
+    +setHijoIzquierdo(ArbolBinario): void
+    +setHijoDerecho(ArbolBinario): void
+    +recorrerPreorden(): String
+    +recorrerInorden(): String
+    +recorrerPostorden(): String
+}
+
+ArbolBinario *--> ArbolBinario: hijoIzquierdo
+ArbolBinario *--> ArbolBinario: hijoDerecho
