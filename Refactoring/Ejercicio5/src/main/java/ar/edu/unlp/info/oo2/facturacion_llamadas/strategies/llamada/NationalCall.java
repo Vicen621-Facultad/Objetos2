@@ -5,6 +5,6 @@ public class NationalCall implements PrecioStrategy {
     @Override
     public double calcularPrecio(int duracion) {
         // el precio es de 3 pesos por segundo más IVA
-        return duracion * 3 + (duracion * 3 * 0.21);
+        return duracion * 3 + (duracion * 3 * IVA);
     }
 }
