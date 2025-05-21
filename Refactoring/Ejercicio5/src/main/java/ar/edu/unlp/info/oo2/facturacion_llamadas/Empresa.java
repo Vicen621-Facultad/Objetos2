@@ -11,8 +11,6 @@ import java.util.List;
 
 public class Empresa {
 	private List<Cliente> clientes = new ArrayList<>();
-	// TODO: No se usa, habria que sacarla?
-	private List<Llamada> llamadas = new ArrayList<>();
 	private GestorNumerosDisponibles guia = new GestorNumerosDisponibles();
 
 	public boolean agregarNumeroTelefono(String str) {
@@ -44,7 +42,6 @@ public class Empresa {
 
 	public Llamada registrarLlamada(Cliente origen, Cliente destino, PrecioStrategy tipo, int duracion) {
 		Llamada llamada = new Llamada(tipo, origen.getNumeroTelefono(), destino.getNumeroTelefono(), duracion);
-		llamadas.add(llamada);
 		origen.getLlamadas().add(llamada);
 		return llamada;
 	}
