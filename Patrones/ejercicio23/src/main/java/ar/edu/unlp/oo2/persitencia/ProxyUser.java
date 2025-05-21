@@ -23,7 +23,7 @@ public class ProxyUser implements PersistableUser {
 
     @Override
     public List<Post> getPosts() {
-        if (this.cachedPosts) {
+        if (!this.cachedPosts) {
             this.user.addPosts(new PostRepository().findPostsByUsername(getUsername()));
             this.cachedPosts = true;
         }

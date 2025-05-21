@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.oo2.facturacion_llamadas.strategies.llamada;
 
+//TODO: magic numbers
 public class NationalCall implements PrecioStrategy {
     @Override
     public double calcularPrecio(int duracion) {

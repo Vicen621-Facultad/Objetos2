@@ -15,9 +15,6 @@ public class Empresa {
 	private List<Llamada> llamadas = new ArrayList<>();
 	private GestorNumerosDisponibles guia = new GestorNumerosDisponibles();
 
-	static double descuentoJur = 0.15;
-	static double descuentoFis = 0;
-
 	public boolean agregarNumeroTelefono(String str) {
 		return guia.getLineas().add(str);
 	}

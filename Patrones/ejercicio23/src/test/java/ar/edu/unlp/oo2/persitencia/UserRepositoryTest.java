@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-//TODO: No se como testearlo
+//TODO: Testear mockeando el post repository, contar la cantidad de veces que se llama con un contador
 public class UserRepositoryTest {
 
 	@Test
