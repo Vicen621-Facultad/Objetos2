@@ -1,0 +1,37 @@
+class Jugador {
+    -nombre: String
+
+    +<<create>> Jugador(nombre: String, capacidadInicial: integer)
+    +agregarItem(Item): boolean
+    +buscarBolsaMasGrande(): Bolsa
+    +capacidadDisponible(): integer
+}
+
+abstract class IItem<<component>> {
+    -nombre
+    -espacioOcupado: integer
+
+    +agregarItem(Item): boolean
+    +buscarBolsaMasGrande(): Bolsa
+    +buscarItem(nombre: String): Item
+    +capacidadDisponible(): integer
+}
+
+class Bolsa<<composite>> implements IItem {
+    -capacidad: integer
+
+    +agregarItem(Item): boolean
+    +buscarBolsaMasGrande(): Bolsa
+    +buscarItem(nombre: String): Item
+    +capacidadDisponible(): integer
+}
+
+class Item<<leaf>> implements IItem{
+    +agregarItem(Item): boolean
+    +buscarBolsaMasGrande(): Bolsa
+    +buscarItem(nombre: String): Item
+    +capacidadDisponible(): integer
+}
+
+Jugador *--> Bolsa: -bolsa
+Bolsa *--> Item: -items

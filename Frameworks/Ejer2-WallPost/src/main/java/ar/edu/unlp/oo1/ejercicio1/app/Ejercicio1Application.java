@@ -1,14 +1,11 @@
 package ar.edu.unlp.oo1.ejercicio1.app;
 
-import ar.edu.unlp.oo1.ejercicio1.logging.CensoringHandler;
 import ar.edu.unlp.oo1.ejercicio1.logging.JsonFormatter;
 import ar.edu.unlp.oo1.ejercicio1.logging.MailHandler;
-import ar.edu.unlp.oo1.ejercicio1.logging.UpperCaseFormatter;
 import ar.edu.unlp.oo1.ejercicio1.ui.WallPostUI;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.*;
 
 public class Ejercicio1Application {
