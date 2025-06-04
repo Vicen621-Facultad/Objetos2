@@ -1,0 +1,35 @@
+abstract class AbstractEtiqueta<<component>> {
+    -text: String
+    -estilo: String
+    +{abstract} aplicarEstilo(estilo: ConfiguracionDeEstilo)
+    +{abstract} imprimir()
+}
+
+class Etiqueta<<leaf>> extends AbstractEtiqueta {
+    +aplicarEstilo(estilo: ConfiguracionDeEstilo)
+    +imprimir()
+}
+
+class Boton<<leaf>> extends AbstractEtiqueta {
+    -accion: String
+    +aplicarEstilo(estilo: ConfiguracionDeEstilo)
+    +imprimir()
+}
+
+class Contenedor<<composite>> extends AbstractEtiqueta {
+    +aplicarEstilo(estilo: ConfiguracionDeEstilo)
+    +imprimir()
+}
+
+class ListaDesplegableAdapter<<adapter>> extends AbstractEtiqueta {
+    +aplicarEstilo(estilo: ConfiguracionDeEstilo)
+    +imprimir()
+}
+
+class ListaDesplegable {
+    +print(): String
+    +setStyle(style: String)
+}
+
+Contenedor *--> AbstractEtiqueta: childs
+ListaDesplegableAdapter --> ListaDesplegable: adaptee
