@@ -34,4 +34,4 @@ class Item<<leaf>> implements IItem{
 }
 
 Jugador *--> Bolsa: -bolsa
-Bolsa *--> Item: -items
+Bolsa *--> IItem: -items
